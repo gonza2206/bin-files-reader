@@ -25,5 +25,23 @@ with open(binary_file, 'rb') as file:
     else:
         result = '};'.join(hex_values)
 
-# Print the result
-print(f'code[]{{{result}}}')
+# Guardar el resultado en un archivo C++
+output_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpgradeRFProgram.h'  # Reemplaza 'ruta_a_tu_archivo.cpp' con la ruta de tu archivo C++
+
+# Lee el contenido actual del archivo .h
+with open(output_file, 'r') as cpp_file:
+    existing_lines = cpp_file.readlines()
+
+# Abre el archivo en modo escritura para reemplazar su contenido
+with open(output_file, 'w') as cpp_file:
+    updated_lines = []
+
+    for line in existing_lines:
+        if "static constexpr const uint8_t code[] = {0};" in line:
+            updated_lines.append(f'  static constexpr const uint8_t code[] = {{{result}}};\n')
+        else:    
+            updated_lines.append(line)
+
+    cpp_file.writelines(updated_lines)
+    
+print(f'El valor de la variable "result" se ha guardado en {output_file}')
