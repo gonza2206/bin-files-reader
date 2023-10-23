@@ -1,6 +1,12 @@
 # Name of the binary file to read
 binary_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\RFGW_1.0.3.bin'
 
+# Save the result to a C++ file
+template_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpgradeRFProgram.h'
+
+# Name of the destination file
+new_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpdateProgram.h'
+
 # Function to convert a value to hexadecimal format with '0x'
 def to_hex(value):
     return f'0x{value:02X}'
@@ -25,11 +31,9 @@ with open(binary_file, 'rb') as file:
     else:
         result = '};'.join(hex_values)
 
-# Save the result to a C++ file
-template_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpgradeRFProgram.h'
-
-# Name of the destination file
-new_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpdateProgram.h'
+# Check if the new file exists and delete it.
+if os.path.exists(new_file):
+    os.remove(new_file)
 
 # Copy the content from the template file to a new file and replace the value of 'result'
 with open(template_file, 'r') as template, open(new_file, 'w') as new:
