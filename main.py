@@ -26,22 +26,15 @@ with open(binary_file, 'rb') as file:
         result = '};'.join(hex_values)
 
 # Guardar el resultado en un archivo C++
-output_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpgradeRFProgram.h'  # Reemplaza 'ruta_a_tu_archivo.cpp' con la ruta de tu archivo C++
+template_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpgradeRFProgram.h'  # Reemplaza 'ruta_a_tu_archivo.cpp' con la ruta de tu archivo C++
 
-# Lee el contenido actual del archivo .h
-with open(output_file, 'r') as cpp_file:
-    existing_lines = cpp_file.readlines()
+# Nombre del archivo de destino
+new_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpdateProgram.h'
 
-# Abre el archivo en modo escritura para reemplazar su contenido
-with open(output_file, 'w') as cpp_file:
-    updated_lines = []
+# Copiar el contenido de la plantilla a un nuevo archivo y reemplazar el valor de 'result'
+with open(template_file, 'r') as template, open(new_file, 'w') as new:
+    template_content = template.read()
+    new_content = template_content.replace('static constexpr const uint8_t code[] = {0};', f'static constexpr const uint8_t code[] = {{{result}}};')
+    new.write(new_content)
 
-    for line in existing_lines:
-        if "static constexpr const uint8_t code[] = {0};" in line:
-            updated_lines.append(f'  static constexpr const uint8_t code[] = {{{result}}};\n')
-        else:    
-            updated_lines.append(line)
-
-    cpp_file.writelines(updated_lines)
-    
-print(f'El valor de la variable "result" se ha guardado en {output_file}')
+print(f'Se ha creado un nuevo archivo en {new_file} con el valor reemplazado.')
