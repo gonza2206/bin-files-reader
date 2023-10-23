@@ -42,3 +42,12 @@ with open(template_file, 'r') as template, open(new_file, 'w') as new:
     new.write(new_content)
 
 print(f'A new file has been created at {new_file} with the replaced value.')
+
+# Automatize RF Update program. in CMAKE
+################################################################################
+
+# add_custom_target(RF_UPDATE
+#         COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/RFUpgrade.py
+#         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#         COMMENT "Running RF Upgrade Script"
+# )
