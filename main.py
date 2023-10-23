@@ -25,16 +25,16 @@ with open(binary_file, 'rb') as file:
     else:
         result = '};'.join(hex_values)
 
-# Guardar el resultado en un archivo C++
-template_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpgradeRFProgram.h'  # Reemplaza 'ruta_a_tu_archivo.cpp' con la ruta de tu archivo C++
+# Save the result to a C++ file
+template_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpgradeRFProgram.h'
 
-# Nombre del archivo de destino
+# Name of the destination file
 new_file = 'C:\\Users\\Urano\\Documents\\GitHub\\bin-files-reader\\UpdateProgram.h'
 
-# Copiar el contenido de la plantilla a un nuevo archivo y reemplazar el valor de 'result'
+# Copy the content from the template file to a new file and replace the value of 'result'
 with open(template_file, 'r') as template, open(new_file, 'w') as new:
     template_content = template.read()
     new_content = template_content.replace('static constexpr const uint8_t code[] = {0};', f'static constexpr const uint8_t code[] = {{{result}}};')
     new.write(new_content)
 
-print(f'Se ha creado un nuevo archivo en {new_file} con el valor reemplazado.')
+print(f'A new file has been created at {new_file} with the replaced value.')
